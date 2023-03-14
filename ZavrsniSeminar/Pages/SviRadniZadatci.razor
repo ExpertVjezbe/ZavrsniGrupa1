@@ -1,0 +1,54 @@
+﻿@page "/"
+@page "/sviradnizadatci"
+@using ZavrsniSeminar.Models;
+@inject HttpClient httpClient;
+@inject NavigationManager navManager;
+
+<h3 class="svizadatcinaslov">Popis svih radnih zadataka</h3>
+<br>
+
+<ul class="list-group">
+	@foreach (var item in sviradnizadatci)
+		{
+		<li class="list-group-item active" aria-current="true">Id Zadatka: @item.Id <button class="btn btn-outline-light" @onclick="()=>Rijeseno(item.Id)">Riješen Zadatak</button></li>
+		<li class="list-group-item">Naziv Zadatka: @item.todo</li>
+		<li class="list-group-item">Ime Radnika: @item.radnikIme</li>
+		<li class="list-group-item">Prezime Radnika: @item.radnikPrezime</li>
+		<li class="list-group-item">Opis Posla: @item.opisPosla</li>
+		<li class="list-group-item">Datum: @item.datum</li>
+		<br>
+		<br>
+		}
+</ul>
+
+@code{
+	public List<RadniZadatak> sviradnizadatci = new List<RadniZadatak>();
+	public bool IsDone = true;
+
+	protected override async Task OnInitializedAsync()
+	{
+		var result = await httpClient.GetAsync("https://expertvjezbeapi.azurewebsites.net/api/ToDoSeminars/");
+		if (result.IsSuccessStatusCode)
+		{
+			sviradnizadatci = await result.Content.ReadFromJsonAsync<List<RadniZadatak>>();
+			sviradnizadatci = sviradnizadatci.Where(x => x.IsDone == false).OrderBy(x=>x.todo).ToList();
+		}
+	}
+
+
+	public async Task Rijeseno(int id)
+	{
+		var result = await httpClient.PostAsJsonAsync($"https://expertvjezbeapi.azurewebsites.net/api/ToDoSeminars/IsDone/{id}", "");
+		if (result.IsSuccessStatusCode)
+		{
+			var result1 = await httpClient.GetAsync("https://expertvjezbeapi.azurewebsites.net/api/ToDoSeminars/");
+			if (result1.IsSuccessStatusCode)
+			{
+				sviradnizadatci = await result1.Content.ReadFromJsonAsync<List<RadniZadatak>>();
+				sviradnizadatci = sviradnizadatci.Where(x => x.IsDone == false).OrderByDescending(x => x.datum).ToList();
+			}
+			StateHasChanged();
+		}
+	}
+
+}

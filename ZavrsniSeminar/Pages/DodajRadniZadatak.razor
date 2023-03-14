@@ -1,0 +1,50 @@
+﻿@page "/dodajradnizadatak"
+@using ZavrsniSeminar.Models;
+@inject HttpClient httpClient;
+@inject NavigationManager navManager;
+
+<h3 class="svizadatcinaslov">Dodaj novi radni zadatak</h3>
+<br>
+
+<form @onsubmit="DodajZadatak">
+	
+	<div class="input-group mb-3">
+		<span class="input-group-text" id="inputGroup-sizing-default">Naziv Zadatka</span>
+		<input type="text" class="form-control" @bind-value="sviradnizadatci.todo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+	</div>
+
+	<div class="input-group mb-3">
+		<span class="input-group-text" id="inputGroup-sizing-default">Ime Radnika</span>
+		<input type="text" class="form-control" @bind-value="sviradnizadatci.radnikIme" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+	</div>
+	
+	<div class="input-group mb-3">
+		<span class="input-group-text" id="inputGroup-sizing-default">Prezime Radnika</span>
+		<input type="text" class="form-control" @bind-value="sviradnizadatci.radnikPrezime" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+	</div>
+
+	<div class="input-group mb-3">
+		<span class="input-group-text" id="inputGroup-sizing-default">Opis Posla</span>
+		<input type="text" class="form-control" @bind-value="sviradnizadatci.opisPosla" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+	</div>
+
+	<p>
+		<button class="btn btn-primary" submit">Dodaj zadatak</button>
+	</p>
+
+</form>
+
+@code {
+	public RadniZadatak sviradnizadatci = new RadniZadatak();
+	public async Task DodajZadatak()
+	{
+		sviradnizadatci.IsDone = false;
+		sviradnizadatci.datum = DateTime.Now;
+		var result = await httpClient.PostAsJsonAsync<RadniZadatak>($"https://expertvjezbeapi.azurewebsites.net/api/ToDoSeminars", sviradnizadatci);
+
+		if (result.IsSuccessStatusCode)
+		{
+			navManager.NavigateTo("/sviradnizadatci");
+		}
+	}
+}

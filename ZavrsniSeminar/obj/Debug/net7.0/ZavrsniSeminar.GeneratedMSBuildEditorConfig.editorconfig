@@ -1,0 +1,53 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = ZavrsniSeminar
+build_property.RootNamespace = ZavrsniSeminar
+build_property.ProjectDir = C:\Users\dinok\Desktop\Web programiranje\ZavrsniSeminar\ZavrsniSeminar\ZavrsniSeminar\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\dinok\Desktop\Web programiranje\ZavrsniSeminar\ZavrsniSeminar\ZavrsniSeminar
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/dinok/Desktop/Web programiranje/ZavrsniSeminar/ZavrsniSeminar/ZavrsniSeminar/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dinok/Desktop/Web programiranje/ZavrsniSeminar/ZavrsniSeminar/ZavrsniSeminar/Pages/DodajRadniZadatak.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9kYWpSYWRuaVphZGF0YWsucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dinok/Desktop/Web programiranje/ZavrsniSeminar/ZavrsniSeminar/ZavrsniSeminar/Pages/ObrisiRadniZadatak.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2JyaXNpUmFkbmlaYWRhdGFrLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dinok/Desktop/Web programiranje/ZavrsniSeminar/ZavrsniSeminar/ZavrsniSeminar/Pages/RijeseniRadniZadaci.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmlqZXNlbmlSYWRuaVphZGFjaS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dinok/Desktop/Web programiranje/ZavrsniSeminar/ZavrsniSeminar/ZavrsniSeminar/Pages/SviRadniZadatci.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3ZpUmFkbmlaYWRhdGNpLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dinok/Desktop/Web programiranje/ZavrsniSeminar/ZavrsniSeminar/ZavrsniSeminar/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dinok/Desktop/Web programiranje/ZavrsniSeminar/ZavrsniSeminar/ZavrsniSeminar/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dinok/Desktop/Web programiranje/ZavrsniSeminar/ZavrsniSeminar/ZavrsniSeminar/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-4u39b6jcpa
+
+[C:/Users/dinok/Desktop/Web programiranje/ZavrsniSeminar/ZavrsniSeminar/ZavrsniSeminar/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-jjju9832ux

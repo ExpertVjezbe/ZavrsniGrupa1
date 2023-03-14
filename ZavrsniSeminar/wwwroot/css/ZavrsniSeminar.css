@@ -1,0 +1,45 @@
+﻿    .list-group{
+        border-radius: 20px;
+    
+    }
+
+    .list-group-item.active {
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 33%, rgba(0,99,255,1) 100%);
+    }
+
+    .list-group-item {
+        border-radius: 20px;
+        background: rgb(0,8,79);
+        background: linear-gradient(90deg, rgba(0,8,79,1) 0%, rgba(255,255,255,1) 2%, rgba(255,255,255,1) 98%, rgba(0,8,79,1) 100%);
+    }
+
+    .btn {
+        margin-left: 10px;
+        border-radius: 15px;
+        float:right;
+    }
+
+    .svizadatcinaslov {
+        text-align:center;
+        text-shadow: 2px 2px 5px royalblue;
+    }
+
+    .form-control {
+        border-radius: 25px;
+    }
+
+    .input-group-text {
+        border-radius:25px;
+    }
+
+    .nav-scrollable {
+        background: #000428; /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #004e92, #000428); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+
+    .nav-item{
+        border-radius: 25px;
+    }
+

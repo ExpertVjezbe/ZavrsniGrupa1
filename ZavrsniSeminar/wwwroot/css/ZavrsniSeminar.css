@@ -1,0 +1,55 @@
+﻿.form-control{
+background-color:greenyellow;
+}
+.form-control {
+    background-color: yellow;
+    border-radius: 10px;
+    position: center;
+}
+
+.btn-outline-danger{
+    background-color:aquamarine;
+}
+
+.one{
+    color: red;
+}
+.two{
+    color:blue;
+}
+.ps-3{
+    background-color: rgb(216 32 32 / 95%) !important;
+}
+
+    
+
+
+.marko {
+   color: purple;
+}
+.dora {
+    color: deeppink;
+
+}
+.matej {
+    color: blue;
+
+}
+
+.helena {
+
+    color: green;
+
+}
+
+.sidebar {
+    background-image: linear-gradient(180deg, rgb(22 175 28 / 79%) 0%, #c25421 70%) !important;
+}
+   
+
+
+
+   
+
+
+

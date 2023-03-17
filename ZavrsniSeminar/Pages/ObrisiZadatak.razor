@@ -1,0 +1,91 @@
+﻿@page "/obrisi/{id:int}"
+@using ZavrsniSeminar.Models;
+@inject HttpClient httpClient;
+@inject NavigationManager navManager;
+@inject IJSRuntime  jsRun;
+
+
+<p>
+    <h3>Obriši zadatak</h3>
+    
+
+
+</p>
+@if (IsError == true)
+{
+    <p>Nešto je pošlo po krivu,kontaktirajte administratora!</p>
+
+}
+<form>
+
+    <div class="mb-3">
+        <label for="ftodo" class="form-label">To Do</label>
+        <input class="form-control" id="ftodo" @bind-value="radniZadatak.Todo" name="ftodo" type="text" />
+
+    </div>
+
+    <div class="mb-3">
+        <label for="fime" class="form-label">Ime radnika</label>
+        <input class="form-control" id="fime" @bind-value="radniZadatak.RadnikIme" name="fime" type="text" />
+
+    </div>
+
+    <div class="mb-3">
+        <label for="fprezime" class="form-label">Prezime radnika</label>
+        <input class="form-control" id="fprezime" @bind-value="radniZadatak.RadnikPrezime" name="fprezime" type="text" />
+
+    </div>
+
+    <div class="mb-3">
+        <label for="fopis" class="form-label">Opis posla</label>
+        <input class="form-control" id="fopis" @bind-value="radniZadatak.OpisPosla"  name="fopis"  type="text" />
+
+    </div>
+
+    <div class="mb-3">
+        <label for="fdate" class="form-label">Datum</label>
+        <input class="form-control" id="fdate" @bind-value="radniZadatak.Datum" name="fdate" type="datetime" />
+
+    </div>
+
+
+</form>
+
+
+
+<button class="btn btn-outline-warning" @onclick="Obrisi">Obriši</button>
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    public RadniZadatak radniZadatak = new RadniZadatak();
+    public bool IsError = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await httpClient.GetAsync($" https://expertvjezbeapi.azurewebsites.net/api/ToDoSeminars/{Id}");
+        if (result.IsSuccessStatusCode)
+        {
+            radniZadatak = await result.Content.ReadFromJsonAsync<RadniZadatak>();
+        }
+    }
+    public async Task Obrisi()
+    {
+        await jsRun.InvokeVoidAsync("alert", "UPOZORENJE!");
+        var confirm = await jsRun.InvokeAsync<bool>("confirm", "Jeste li sigurni da želite obrisati stavku?");
+
+        if (confirm == true)
+        {
+            var result = await httpClient.DeleteAsync($" https://expertvjezbeapi.azurewebsites.net/api/ToDoSeminars/{Id}");
+            if (result.IsSuccessStatusCode)
+            {
+                navManager.NavigateTo($"/rijeseniZadaci");
+            }
+        }
+    }
+    public void Obrisi(int id)
+    {
+        navManager.NavigateTo($"/");
+    }
+}

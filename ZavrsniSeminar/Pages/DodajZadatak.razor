@@ -1,0 +1,48 @@
+﻿@page "/dodajZadatak"
+@using ZavrsniSeminar.Models;
+@inject HttpClient httpClient;
+@inject NavigationManager navManager;
+
+<h3>Dodaj zadatak</h3>
+
+ <form @onsubmit="Dodaj">
+    <div class="h4 pb-2 mb-4 text-danger border-bottom border-danger ">
+        <label for="ftodo" class="mb-3">To do</label>
+        <input class="form-control border-success " id="ftodo" @bind-value="radniZadatak.Todo" name="ftodo" type="text" placeholder="Upiši zadatak" />
+    </div>
+    <div class="h4 pb-2 mb-4 text-danger border-bottom border-danger ">
+        <label for="fime" class="form-label">Ime radnika</label>
+        <input class="form-control border-success " id="fime" @bind-value="radniZadatak.RadnikIme" name="fime" type="text" placeholder="Upiši ime" />
+    </div>
+    <div class="h4 pb-2 mb-4 text-danger border-bottom border-danger ">
+        <label for="fprezime" class="form-label">Prezime radnika</label>
+        <input class="form-control border-success " id="fprezime" @bind-value="radniZadatak.RadnikPrezime" name="fprezime" type="text" placeholder="Upiši prezime" />
+    </div>
+    <div class="h4 pb-2 mb-4 text-danger border-bottom border-danger ">
+        <label for="fopis" class="form-label">Opis posla</label>
+        <input class="form-control border-success " id="fopis" @bind-value="radniZadatak.OpisPosla" name="fopis" type="text" placeholder="Opis posla" />
+    </div>
+    <p>
+        <button class="btn btn-success" type="submit">Dodaj zadatak</button>
+    </p>
+
+</form>
+
+
+
+@code {
+
+    public RadniZadatak radniZadatak = new RadniZadatak();
+
+    public async Task Dodaj()
+    {
+        radniZadatak.IsDone = false;               /* definiranje objekata koji nisu null   */
+        radniZadatak.Datum = DateTime.Now;
+        var result = await httpClient.PostAsJsonAsync<RadniZadatak>($"https://expertvjezbeapi.azurewebsites.net/api/ToDoSeminars", radniZadatak);
+        if (result.IsSuccessStatusCode)
+        {
+            navManager.NavigateTo("/radniZadataks");
+        }
+    }
+
+}

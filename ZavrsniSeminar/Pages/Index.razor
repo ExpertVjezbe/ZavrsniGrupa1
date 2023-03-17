@@ -1,0 +1,66 @@
+﻿@page "/"
+@page "/radniZadataks"
+@using ZavrsniSeminar.Models;
+@inject HttpClient httpClient;
+@inject NavigationManager navManager;
+
+
+<h3>Radni zadatci</h3>
+<table class="table table-hover">
+    <thead>
+        <tr class="table-primary">
+            <th scope="col">Id</th>
+            <th scope="col">Todo</th>
+            <th scope="col">Radnik ime</th>
+            <th scope="col">Radnik prezime</th>
+            <th scope="col">Opis posla</th>
+            <th scope="col">Datum</th>
+            <th colspan="3">Riješeno</th>
+        </tr>
+    </thead>
+    @foreach (var item in radniZadataks)
+    {
+        <tbody>
+            <tr>
+                <td> @item.Id</td>
+                <td> @item.Todo</td>
+                <td> @item.RadnikIme</td>
+                <td> @item.RadnikPrezime</td>
+                <td> @item.OpisPosla</td>
+                <td> @item.Datum</td>
+                <td> <button @onclick="()=>Rijeseno(item.Id)">Riješeno</button></td>
+            </tr>
+        </tbody>
+    }
+</table>
+
+
+@code {
+    public List<RadniZadatak> radniZadataks = new List<RadniZadatak>();
+    public bool IsDone = true;
+
+    protected override async Task OnInitializedAsync()   
+    {
+        var result = await httpClient.GetAsync("https://expertvjezbeapi.azurewebsites.net/api/ToDoSeminars");
+        if (result.IsSuccessStatusCode)
+        {
+            radniZadataks = await result.Content.ReadFromJsonAsync<List<RadniZadatak>>();
+            radniZadataks = radniZadataks.Where(x => x.IsDone == false).OrderBy(x => x.Todo).ToList();    
+        }
+    }
+
+    public async Task Rijeseno(int id)                        
+    {
+        var result = await httpClient.PostAsJsonAsync($"https://expertvjezbeapi.azurewebsites.net/api/ToDoSeminars/IsDone/{id}", "");  
+        if (result.IsSuccessStatusCode)
+        {
+            var result2 = await httpClient.GetAsync("https://expertvjezbeapi.azurewebsites.net/api/ToDoSeminars");
+            if (result2.IsSuccessStatusCode)
+            {
+                radniZadataks = await result2.Content.ReadFromJsonAsync<List<RadniZadatak>>();
+                radniZadataks = radniZadataks.Where(x => x.IsDone == false).OrderByDescending(x => x.Datum).ToList();   
+            }
+            StateHasChanged();
+        }
+    }
+}

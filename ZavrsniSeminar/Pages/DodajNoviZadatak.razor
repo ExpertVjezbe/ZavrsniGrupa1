@@ -1,0 +1,50 @@
+﻿@page "/dodajZadatak"
+@using ZavrsniSeminar.Models;
+@inject HttpClient httpClient;
+@inject NavigationManager navManager;
+
+
+<h3>Dodaj radni zadatak</h3>
+
+
+<form @onsubmit="DodajZadatak">
+    <div class="mb-3">
+        <label for="ftodo" class="form-label">To do</label>
+        <input class="form-control" id="ftodo" @bind-value="radniZadatak.Todo" name="ftodo" type="text" placeholder="Upiši zadatak" />
+    </div>
+    <div class="mb-3">
+        <label for="fime" class="form-label">Ime radnika</label>
+        <input class="form-control" id="fime" @bind-value="radniZadatak.RadnikIme" name="fime" type="text" placeholder="Upiši ime" />
+    </div>
+    <div class="mb-3">
+        <label for="fprezime" class="form-label">Prezime radnika</label>
+        <input class="form-control" id="fprezime" @bind-value="radniZadatak.RadnikPrezime" name="fprezime" type="text" placeholder="Upiši prezime" />
+    </div>
+    <div class="mb-3">
+        <label for="fopis" class="form-label">Opis posla</label>
+        <input class="form-control" id="fopis" @bind-value="radniZadatak.OpisPosla" name="fopis" type="text" placeholder="Opis posla" />
+    </div>
+    <p>
+        <button class="btn btn-primary" type="submit">Dodaj radni zadatak</button>
+    </p>
+
+</form>
+
+
+
+@code {
+   
+    public RadniZadatak radniZadatak = new RadniZadatak();
+
+    public async Task DodajZadatak()
+    {
+        radniZadatak.IsDone = false;               
+        radniZadatak.Datum = DateTime.Now;
+        var result = await httpClient.PostAsJsonAsync<RadniZadatak>($"https://expertvjezbeapi.azurewebsites.net/api/ToDoSeminars", radniZadatak);
+        if (result.IsSuccessStatusCode)
+        {
+            navManager.NavigateTo("/radniZadataks");
+        }
+    }
+
+}
